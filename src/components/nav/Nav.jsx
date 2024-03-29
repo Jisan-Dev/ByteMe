@@ -1,5 +1,6 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
+import { NavLink } from 'react-router-dom';
 
 const Nav = () => {
   const [theme, setTheme] = useState('light');
@@ -47,7 +48,7 @@ const Nav = () => {
           <div className="navbar-end">
             <ul className="menu menu-horizontal px-1 hidden lg:flex font-bold">
               <li>
-                <a>Home</a>
+                <NavLink to="/">Home</NavLink>
               </li>
               <li>
                 <a>Blogs</a>
