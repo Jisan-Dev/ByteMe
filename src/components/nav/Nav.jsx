@@ -1,25 +1,28 @@
 import { useEffect } from 'react';
 import { useState } from 'react';
-import { NavLink } from 'react-router-dom';
+import { Link, NavLink } from 'react-router-dom';
 
 const Nav = () => {
   const [theme, setTheme] = useState('light');
 
   useEffect(() => {
-    localStorage.setItem('theme', theme);
     const localTheme = localStorage.getItem('theme');
-    document.querySelector('html').setAttribute('data-theme', localTheme);
+    setTheme(localTheme ? localTheme : theme);
+    document.querySelector('html').setAttribute('data-theme', theme);
   }, [theme]);
 
   const handleToggle = (e) => {
+    console.log(e.target.checked);
     if (e.target.checked) {
+      localStorage.setItem('theme', 'synthwave');
       setTheme('synthwave');
     } else {
       setTheme('light');
+      localStorage.setItem('theme', 'light');
     }
   };
   return (
-    <div className="bg-base-100 p-4 shadow-lg fixed w-full font-gsans">
+    <div className="bg-base-100  shadow-lg fixed w-full font-gsans">
       <div className="container mx-auto">
         <div className="navbar">
           <div className="navbar-start">
@@ -41,14 +44,16 @@ const Nav = () => {
                 </li>
               </ul>
             </div>
-            <a className="btn btn-ghost gap-0 text-2xl text-primary normal-case ">
-              <span className="text-secondary">Byte</span>Me
-            </a>
+            <Link to="/" className="btn btn-ghost gap-0 text-2xl text-primary normal-case ">
+              <span className="text-secondary">Byte</span>Blaze
+            </Link>
           </div>
           <div className="navbar-end">
             <ul className="menu menu-horizontal px-1 hidden lg:flex font-bold">
               <li>
-                <NavLink to="/">Home</NavLink>
+                <NavLink to="/" className={(isActive) => (isActive ? 'text-primary font-bold' : 'font-bold')}>
+                  Home
+                </NavLink>
               </li>
               <li>
                 <a>Blogs</a>
@@ -59,7 +64,12 @@ const Nav = () => {
             </ul>
             {/* THEME TOGGLER */}
             <label className="cursor-pointer grid place-items-center">
-              <input onChange={handleToggle} type="checkbox" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
+              <input
+                onChange={handleToggle}
+                type="checkbox"
+                checked={theme === 'light' ? false : true}
+                className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2"
+              />
               <svg
                 className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
                 xmlns="http://www.w3.org/2000/svg"
