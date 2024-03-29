@@ -1,4 +1,22 @@
+import { useEffect } from 'react';
+import { useState } from 'react';
+
 const Nav = () => {
+  const [theme, setTheme] = useState('light');
+
+  useEffect(() => {
+    localStorage.setItem('theme', theme);
+    const localTheme = localStorage.getItem('theme');
+    document.querySelector('html').setAttribute('data-theme', localTheme);
+  }, [theme]);
+
+  const handleToggle = (e) => {
+    if (e.target.checked) {
+      setTheme('synthwave');
+    } else {
+      setTheme('light');
+    }
+  };
   return (
     <div className="bg-base-100 p-4 shadow-lg fixed w-full font-gsans">
       <div className="container mx-auto">
@@ -40,7 +58,7 @@ const Nav = () => {
             </ul>
             {/* THEME TOGGLER */}
             <label className="cursor-pointer grid place-items-center">
-              <input type="checkbox" value="synthwave" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
+              <input onChange={handleToggle} type="checkbox" className="toggle theme-controller bg-base-content row-start-1 col-start-1 col-span-2" />
               <svg
                 className="col-start-1 row-start-1 stroke-base-100 fill-base-100"
                 xmlns="http://www.w3.org/2000/svg"
