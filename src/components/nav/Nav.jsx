@@ -4,7 +4,6 @@ import { Link, NavLink } from 'react-router-dom';
 
 const Nav = () => {
   const [theme, setTheme] = useState('light');
-
   useEffect(() => {
     const localTheme = localStorage.getItem('theme');
     setTheme(localTheme ? localTheme : theme);
@@ -49,16 +48,18 @@ const Nav = () => {
             </Link>
           </div>
           <div className="navbar-end">
-            <ul className="menu menu-horizontal px-1 hidden lg:flex font-bold">
-              <li>
-                <NavLink to="/" className={(isActive) => (isActive ? 'text-primary font-bold' : 'font-bold')}>
+            <ul className="gap-2 menu-horizontal px-1 hidden lg:flex font-bold">
+              <li className="p-2 ">
+                <NavLink to="/" className={({ isActive }) => (isActive ? 'text-primary font-bold' : 'font-bold hover:text-primary')}>
                   Home
                 </NavLink>
               </li>
-              <li>
-                <a>Blogs</a>
+              <li className="p-2 ">
+                <NavLink to="/blogs" className={({ isActive }) => (isActive ? 'text-primary font-bold' : 'font-bold hover:text-primary')}>
+                  Blogs
+                </NavLink>
               </li>
-              <li>
+              <li className="p-2 ">
                 <a>Bookmarks</a>
               </li>
             </ul>
