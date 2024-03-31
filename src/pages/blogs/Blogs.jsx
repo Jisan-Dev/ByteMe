@@ -13,7 +13,7 @@ const Blogs = () => {
           <div className="p-6 space-y-2 lg:col-span-5">
             <h3 className="text-2xl font-semibold sm:text-4xl group-hover:underline">{blogs[0].title}</h3>
             <span className="text-xs text-gray-400 dark:text-gray-600">{new Date(blogs[0].published_at).toLocaleString()}</span>
-            <p>{blogs[0].description}</p>
+            <p className="font-medium text-lg">{blogs[0].description}</p>
           </div>
         </a>
         <div className="grid justify-center grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3">
